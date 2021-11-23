@@ -20,12 +20,12 @@ def game_scene(func):
 
 class Game:
     WIDTH, HEIGHT = 800, 800
-    FPS = 15
+    FPS = 10
     CELLS_NUM = 15
 
     def __init__(self):
         self.__pygame_init()
-        self.grid = Grid(self.CELLS_NUM, self.CELLS_NUM, self.screen)
+        self.grid = Grid(self.CELLS_NUM , self.CELLS_NUM, self.screen)
         self.main()
 
     def __pygame_init(self):
@@ -39,6 +39,7 @@ class Game:
     @game_scene
     def main(self, events):
         self.grid.draw()
+        self.grid.update()
 
 
 game = Game()
