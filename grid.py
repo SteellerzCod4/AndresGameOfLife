@@ -7,18 +7,15 @@ class Grid:
         self.width = width
         self.height = height
 
-        self.cell_width = screen.get_width() // self.width
-        self.cell_height = screen.get_height() // self.height
-        self.cell_border = int(self.cell_width * 0.03)
+        self.cell_width = screen.get_width() / self.width
+        self.cell_height = screen.get_height() / self.height
+        self.cell_border = self.cell_width * 0.1
 
         self.diag_dir = diag_dir
         self.screen = screen
         self.cells = [[Cell(False) for _ in range(self.width)] for _ in range(self.height)]
-        self.cells[5][5] = Cell(True)
-        self.cells[5][6] = Cell(True)
-        self.cells[5][7] = Cell(True)
-        self.cells[4][7] = Cell(True)
-        self.cells[3][6] = Cell(True)
+
+        self.draw_glider(1, 7)
 
     def check_indexes(self, x, y):
         return 0 <= x < self.width and 0 <= y < self.height
@@ -40,8 +37,8 @@ class Grid:
         pygame.draw.rect(self.screen, self.cells[y][x].color,
                          pygame.Rect(x * self.cell_width + self.cell_border,
                                      y * self.cell_height + self.cell_border,
-                                     self.cell_width - 2 * self.cell_border,
-                                     self.cell_height - 2 * self.cell_border))
+                                     self.cell_width - self.cell_border,
+                                     self.cell_height - self.cell_border))
 
     def draw(self):
         for i in range(self.width):
@@ -65,15 +62,16 @@ class Grid:
                 if self.cells[i][j].previous_state:
                     if amount < 2 or amount > 3:
                         self.cells[i][j].current_state = False
-                    else:
-                        self.cells[i][j].current_state = True
                 else:
                     if amount == 3:
                         self.cells[i][j].current_state = True
-                    else:
-                        self.cells[i][j].current_state = False
 
         for i in range(self.width):
             for j in range(self.height):
                 self.cells[i][j].previous_state = self.cells[i][j].current_state
 
+    def draw_glider(self, x_star, y_start):
+        coordinates = ((x_star, y_start), (x_star + 1, y_start + 1), (x_star + 1, y_start + 2),
+                       (x_star - 1, y_start + 2), (x_star, y_start + 2))
+        for x, y in coordinates:
+            self.cells[x][y] = Cell(True)

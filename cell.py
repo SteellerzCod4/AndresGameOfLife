@@ -4,7 +4,7 @@ import pygame
 class Cell:
     EMPTY = False
     ALIVE = True
-    EMPTY_COLOR = pygame.Color("#FF9900")
+    EMPTY_COLOR = pygame.Color("#000001")
     ALIVE_COLOR = pygame.Color("#00BF32")
 
     def __init__(self, state):
