@@ -12,10 +12,6 @@ class Cell:
         self.current_state = state
 
     @property
-    def is_alive(self):
-        return self.previous_state
-
-    @property
     def color(self):
         if self.current_state:
             return self.ALIVE_COLOR

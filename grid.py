@@ -15,7 +15,13 @@ class Grid:
         self.screen = screen
         self.cells = [[Cell(False) for _ in range(self.width)] for _ in range(self.height)]
 
-        self.draw_glider(1, 7)
+        for i in range(self.width):
+            self.cells[i][self.height // 2] = Cell(True)
+        for i in range(self.width):
+            self.cells[self.height // 2][i] = Cell(True)
+        for i in range(self.width):
+            self.cells[i][i] = Cell(True)
+        # self.draw_glider(1, 7)
 
     def check_indexes(self, x, y):
         return 0 <= x < self.width and 0 <= y < self.height
@@ -35,10 +41,10 @@ class Grid:
 
     def draw_cell(self, x, y):
         pygame.draw.rect(self.screen, self.cells[y][x].color,
-                         pygame.Rect(x * self.cell_width + self.cell_border,
-                                     y * self.cell_height + self.cell_border,
-                                     self.cell_width - self.cell_border,
-                                     self.cell_height - self.cell_border))
+                         pygame.Rect(y * self.cell_height + self.cell_border,
+                                     x * self.cell_width + self.cell_border,
+                                     self.cell_height - self.cell_border,
+                                     self.cell_width - self.cell_border))
 
     def draw(self):
         for i in range(self.width):

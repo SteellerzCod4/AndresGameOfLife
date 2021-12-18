@@ -20,7 +20,7 @@ def game_scene(func):
 
 class Game:
     WIDTH, HEIGHT = 800, 800
-    FPS = 1
+    FPS = 15
     CELLS_NUM = 90
 
     def __init__(self):
