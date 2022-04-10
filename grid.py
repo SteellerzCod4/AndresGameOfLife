@@ -15,14 +15,6 @@ class Grid:
         self.screen = screen
         self.cells = [[Cell(False) for _ in range(self.width)] for _ in range(self.height)]
 
-        for i in range(self.width):
-            self.cells[i][self.height // 2] = Cell(True)
-        for i in range(self.width):
-            self.cells[self.height // 2][i] = Cell(True)
-        for i in range(self.width):
-            self.cells[i][i] = Cell(True)
-        # self.draw_glider(1, 7)
-
     def check_indexes(self, x, y):
         return 0 <= x < self.width and 0 <= y < self.height
 
@@ -75,9 +67,3 @@ class Grid:
         for i in range(self.width):
             for j in range(self.height):
                 self.cells[i][j].previous_state = self.cells[i][j].current_state
-
-    def draw_glider(self, x_star, y_start):
-        coordinates = ((x_star, y_start), (x_star + 1, y_start + 1), (x_star + 1, y_start + 2),
-                       (x_star - 1, y_start + 2), (x_star, y_start + 2))
-        for x, y in coordinates:
-            self.cells[x][y] = Cell(True)

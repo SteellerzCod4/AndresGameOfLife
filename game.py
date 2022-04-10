@@ -1,5 +1,6 @@
 import pygame
 from grid import Grid
+from cell import Cell
 
 
 def game_scene(func):
@@ -20,12 +21,13 @@ def game_scene(func):
 
 class Game:
     WIDTH, HEIGHT = 800, 800
-    FPS = 15
-    CELLS_NUM = 90
+    FPS = 10
+    CELLS_NUM = 50
 
     def __init__(self):
         self.__pygame_init()
         self.grid = Grid(self.CELLS_NUM, self.CELLS_NUM, self.screen)
+        self.start_config_1()
         self.main()
 
     def __pygame_init(self):
@@ -35,6 +37,22 @@ class Game:
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont('arial', 36)
+
+    def start_config_1(self):
+        for i in range(self.grid.width):
+            self.grid.cells[i][self.grid.height // 2] = Cell(True)
+            self.grid.cells[self.grid.height // 2][i] = Cell(True)
+            self.grid.cells[i][i] = Cell(True)
+
+    def start_config_2(self):
+        for i in range(self.grid.width):
+            self.grid.cells[i][self.grid.height // 2] = Cell(True)
+
+    def draw_glider(self, x_star, y_start):
+        coordinates = ((x_star, y_start), (x_star + 1, y_start + 1), (x_star + 1, y_start + 2),
+                       (x_star - 1, y_start + 2), (x_star, y_start + 2))
+        for x, y in coordinates:
+            self.grid.cells[x][y] = Cell(True)
 
     @game_scene
     def main(self, events):
