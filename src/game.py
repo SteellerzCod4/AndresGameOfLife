@@ -1,6 +1,7 @@
 import pygame
 from grid import Grid
 from cell import Cell
+from random import choice
 
 
 def game_scene(func):
@@ -27,7 +28,9 @@ class Game:
     def __init__(self):
         self.__pygame_init()
         self.grid = Grid(self.CELLS_NUM, self.CELLS_NUM, self.screen)
-        self.start_config_1()
+        self.configurations = [self.start_config_1, self.start_config_2]
+        start_config = choice(self.configurations)
+        start_config()
         self.main()
 
     def __pygame_init(self):
