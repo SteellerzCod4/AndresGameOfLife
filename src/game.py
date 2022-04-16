@@ -24,7 +24,6 @@ class Game:
     WIDTH, HEIGHT = 800, 800
     FPS = 10
     CELLS_NUM = 50
-    START_CONF_NAME = "start_config"
 
     def __init__(self):
         self.__pygame_init()
