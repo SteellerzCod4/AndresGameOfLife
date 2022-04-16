@@ -24,11 +24,12 @@ class Game:
     WIDTH, HEIGHT = 800, 800
     FPS = 10
     CELLS_NUM = 50
+    START_CONF_NAME = "start_config"
 
     def __init__(self):
         self.__pygame_init()
         self.grid = Grid(self.CELLS_NUM, self.CELLS_NUM, self.screen)
-        self.configurations = [self.start_config_1, self.start_config_2]
+        self.configurations = [self.start_config_2, self.start_config_2, self.start_config_3]
         start_config = choice(self.configurations)
         start_config()
         self.main()
@@ -50,6 +51,12 @@ class Game:
     def start_config_2(self):
         for i in range(self.grid.width):
             self.grid.cells[i][self.grid.height // 2] = Cell(True)
+
+    def start_config_3(self):
+        for i in range(self.grid.width):
+            self.grid.cells[i][0] = Cell(True)
+            self.grid.cells[i][4] = Cell(True)
+            self.grid.cells[3][i] = Cell(True)
 
     def draw_glider(self, x_star, y_start):
         coordinates = ((x_star, y_start), (x_star + 1, y_start + 1), (x_star + 1, y_start + 2),
