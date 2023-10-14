@@ -36,7 +36,7 @@ class Game:
     def __pygame_init(self):
         pygame.init()
         pygame.display.set_caption("Game of life")
-        # pygame.display.set_icon(pygame.image.load("img/icon.png"))
+        pygame.display.set_icon(pygame.image.load("img/new_icon.png"))
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont('arial', 36)
